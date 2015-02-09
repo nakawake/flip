@@ -1,9 +1,10 @@
 (function( $ ) {
-  var flip = function(dom, flipedRotate) {
+  var flip = function(dom, flipedRotate, settings) {
     dom.data("fliped", true);
     dom.css({
       transform: flipedRotate
     });
+    setTimeout(settings.callback, settings.speed);
   };
 
   var unflip = function(dom) {
@@ -28,12 +29,13 @@
           axis: "y",
           reverse: false,
           trigger: "click",
-          speed: 500
+          speed: 500,
+          callback: function(){}
         }, options );
 
         var prespective;
         var direction = settings.reverse? "-180deg" : "180deg";
-        
+
         if (settings.axis.toLowerCase() == "x") {
           prespective = $dom.outerHeight() * 2;
           // save rotating css to DOM for manual flip
@@ -84,14 +86,14 @@
             if ($dom.data("fliped")) {
               unflip($dom);
             } else {
-              flip($dom, flipedRotate);
+              flip($dom, flipedRotate, settings);
             }
           });
         } else if (settings.trigger.toLowerCase() == "hover") {
           var performFlip = function() {
             $dom.unbind('mouseleave', performUnflip);
 
-            flip($dom, flipedRotate);
+            flip($dom, flipedRotate, settings);
 
             setTimeout(function() {
               $dom.bind('mouseleave', performUnflip);
@@ -113,5 +115,5 @@
 
     return this;
   };
- 
+
 }( jQuery ));

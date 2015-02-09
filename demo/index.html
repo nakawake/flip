@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="../bower_components/jquery/dist/jquery.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script src="../src/flip.js"></script>
     <title>jQuery plugin</title>
     <style type="text/css">
@@ -42,18 +42,21 @@
           <a href="http://google.com">link</a>
           Back: Dolor scelerisque ridiculus! Mus? Augue, montes, montes proin rhoncus vel a parturient dapibus eros? Penatibus nascetur. In turpis nisi elementum nascetur habitasse augue egestas, in ac rhoncus odio porttitor turpis.
           <button>button</button>
-      </div> 
+      </div>
     </div>
 
     <script type="text/javascript">
     $(function(){
       // $(".card").flip();
-      
+
       $("#card-1").flip({
         axis: "y", // y or x
         reverse: false, // true and false
         trigger: "hover", // click or hover
-        speed: 1000
+        speed: 1000,
+        callback:function(){
+          alert('message');
+        }
       });
       $("#card-2").flip({
         axis: "y",
